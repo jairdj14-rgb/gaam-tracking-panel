@@ -1,0 +1,104 @@
+@import 'tailwindcss';
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+.leaflet-container img {
+  max-width: none !important;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.leaflet-popup-content-wrapper {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+}
+
+.leaflet-popup-tip {
+  background: #07111f !important;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.smooth-marker {
+  transition:
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+.shimmer-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-button::after {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+
+  transform: translateX(-120%);
+
+  transition: transform 0.7s ease;
+}
+
+.shimmer-button:hover::after {
+  transform: translateX(120%);
+}
+
+button:hover::after {
+  transform: translateX(120%);
+}
