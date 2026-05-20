@@ -6,7 +6,7 @@ import './index.css';
 import 'leaflet/dist/leaflet.css';
 
 import { Toaster } from 'react-hot-toast';
-
+console.log(import.meta.env.VITE_API_URL);
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <>
