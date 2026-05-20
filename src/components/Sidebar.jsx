@@ -720,7 +720,7 @@ export default function Sidebar({
             isSuspicious={isSuspicious}
           />
         </div>
-
+        {/*
         <button
           onClick={async () => {
             const token = localStorage.getItem('accessToken');
@@ -743,6 +743,9 @@ export default function Sidebar({
         >
           {inside ? '🔴 Salir zona' : '🟢 Entrar zona'}
         </button>
+
+*/}
+
         {/* 🚪 LOGOUT */}
         <button
           onClick={onLogout}
