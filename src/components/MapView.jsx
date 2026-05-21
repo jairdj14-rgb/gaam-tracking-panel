@@ -639,9 +639,7 @@ export default function MapView({
       </MapContainer>
       {isAdjustingZone && selectedZone && (
         <div
-          className={`
-      ${overlayCard}
-
+          className="
       absolute
 
       bottom-4 left-4 right-4 md:left-auto md:right-6
@@ -650,8 +648,18 @@ export default function MapView({
 
       flex flex-col md:flex-row items-center gap-3
 
-      p-3
-    `}
+      p-4
+
+      rounded-3xl
+
+      border border-white/10
+
+      bg-[#06111f]/85
+
+      backdrop-blur-2xl
+
+      shadow-[0_20px_60px_rgba(0,0,0,0.35)]
+    "
         >
           <button
             onClick={() => {
@@ -662,22 +670,22 @@ export default function MapView({
               setIsAdjustingZone(false);
             }}
             className="
-    px-5 py-3
+        px-5 py-3
 
-    rounded-2xl
+        rounded-2xl
 
-    bg-white/[0.12]
-    hover:bg-white/[0.18]
+        bg-white/[0.12]
+        hover:bg-white/[0.18]
 
-    border border-white/15
+        border border-white/15
 
-    shadow-[0_4px_20px_rgba(0,0,0,0.25)]
+        shadow-[0_4px_20px_rgba(0,0,0,0.25)]
 
-    text-white/90
-    hover:text-white
+        text-white/90
+        hover:text-white
 
-    transition-all duration-200
-  "
+        transition-all duration-200
+      "
           >
             ❌ Cancelar
           </button>
@@ -693,23 +701,23 @@ export default function MapView({
               setIsAdjustingZone(false);
             }}
             className="
-    px-5 py-3
+        px-5 py-3
 
-    rounded-2xl
+        rounded-2xl
 
-    bg-cyan-400/[0.18]
-    hover:bg-cyan-400/[0.28]
+        bg-cyan-400/[0.18]
+        hover:bg-cyan-400/[0.28]
 
-    border border-cyan-400/30
+        border border-cyan-400/30
 
-    shadow-[0_4px_25px_rgba(34,211,238,0.22)]
+        shadow-[0_4px_25px_rgba(34,211,238,0.22)]
 
-    text-cyan-200
+        text-cyan-200
 
-    font-medium
+        font-medium
 
-    transition-all duration-200
-  "
+        transition-all duration-200
+      "
           >
             💾 Guardar
           </button>
