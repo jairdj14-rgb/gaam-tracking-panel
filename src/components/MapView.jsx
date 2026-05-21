@@ -640,26 +640,24 @@ export default function MapView({
       {isAdjustingZone && selectedZone && (
         <div
           className="
-      absolute
+  absolute
 
-      bottom-4 left-4 right-4 md:left-auto md:right-6
+  bottom-4 left-4 right-4 md:left-auto md:right-6
 
-      z-[1000]
+  z-[1000]
 
-      flex flex-col md:flex-row items-center gap-3
+  flex flex-col md:flex-row items-center gap-3
 
-      p-4
+  p-4
 
-      rounded-3xl
+  rounded-3xl
 
-      border border-white/10
+  bg-[#06111f]
 
-      bg-[#06111f]/85
+  border border-white/10
 
-      backdrop-blur-2xl
-
-      shadow-[0_20px_60px_rgba(0,0,0,0.35)]
-    "
+  shadow-2xl
+"
         >
           <button
             onClick={() => {
