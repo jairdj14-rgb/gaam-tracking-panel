@@ -34,6 +34,8 @@ export default function Sidebar({
 
   searchResults,
   setSearchResults,
+  setShowCompaniesPanel,
+  setShowAuditPanel,
 }) {
   const [showZones, setShowZones] = useState(false);
   const [openZoneId, setOpenZoneId] = useState(null);
@@ -669,6 +671,31 @@ export default function Sidebar({
           >
             🏢 Configuración empresa
           </button>
+        )}
+
+        {role === 'SUPER_ADMIN' && (
+          <>
+            <button
+              onClick={() => setShowCompaniesPanel(true)}
+              className={`${actionButton} shimmer-button`}
+            >
+              🏢 Empresas
+            </button>
+
+            <button className={`${actionButton} shimmer-button`}>
+              👑 Admins globales
+            </button>
+
+            <button className={`${actionButton} shimmer-button`}>
+              onClick={() => setShowAuditPanel(true)}
+              className={`${actionButton} shimmer-button`}
+              🕒 Auditoría
+            </button>
+
+            <button className={`${actionButton} shimmer-button`}>
+              📊 Reportes globales
+            </button>
+          </>
         )}
 
         <div className="border-t border-white/10 my-3" />

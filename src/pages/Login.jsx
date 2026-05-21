@@ -42,6 +42,8 @@ export default function Login({ onLogin }) {
 
       localStorage.setItem('refreshToken', data.refreshToken);
 
+      localStorage.setItem('user', JSON.stringify(data.user));
+
       toast.success('Bienvenido');
 
       setTimeout(() => {

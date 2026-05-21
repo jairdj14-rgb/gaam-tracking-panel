@@ -20,12 +20,19 @@ import useSession from './hooks/useSession';
 import useTimeline from './hooks/useTimeline';
 import { socket } from './socket';
 import { ENV } from './env';
+import CompaniesPanel from './components/CompaniesPanel';
+import AuditLogsPanel from './components/AuditLogsPanel';
 
 export default function App() {
+  const currentUser = JSON.parse(localStorage.getItem('user') || 'null');
   const [followUserId, setFollowUserId] = useState(null);
   const [selectedUserId, setSelectedUserId] = useState(null);
 
   const [alert, setAlert] = useState(null);
+
+  const [showCompaniesPanel, setShowCompaniesPanel] = useState(false);
+
+  const [showAuditPanel, setShowAuditPanel] = useState(false);
 
   const [showUsersPanel, setShowUsersPanel] = useState(false);
 
@@ -512,8 +519,10 @@ export default function App() {
         setIsEditingZone={setIsEditingZone}
         setOriginalZone={setOriginalZone}
         setFlyToZone={setFlyToZone}
-        role={role}
+        role={currentUser?.role}
         setShowUsersPanel={setShowUsersPanel}
+        setShowCompaniesPanel={setShowCompaniesPanel}
+        setShowAuditPanel={setShowAuditPanel}
         zoneEvents={zoneEvents}
         onSelectUser={handleSelectUser}
         evidences={evidences}
@@ -557,6 +566,12 @@ export default function App() {
 
       {showUsersPanel && (
         <UsersPanel onClose={() => setShowUsersPanel(false)} />
+      )}
+      {showCompaniesPanel && (
+        <CompaniesPanel onClose={() => setShowCompaniesPanel(false)} />
+      )}
+      {showAuditPanel && (
+        <AuditLogsPanel onClose={() => setShowAuditPanel(false)} />
       )}
       {showCompanySettings && (
         <CompanySettingsModal onClose={() => setShowCompanySettings(false)} />

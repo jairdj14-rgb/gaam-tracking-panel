@@ -5,6 +5,7 @@ import { ENV } from '../env';
 export default function SessionWatcher({ onLogout }) {
   const [showWarning, setShowWarning] = useState(false);
   const [secondsLeft, setSecondsLeft] = useState(0);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(async () => {
@@ -22,8 +23,10 @@ export default function SessionWatcher({ onLogout }) {
         setSecondsLeft(remaining);
 
         //  mostrar warning faltando 5 min
-        if (remaining === 300) {
+        if (remaining <= 300 && !refreshing) {
           try {
+            setRefreshing(true);
+
             const refreshToken = localStorage.getItem('refreshToken');
 
             const refreshRes = await fetch(`${ENV.API_URL}/auth/refresh`, {
@@ -48,6 +51,9 @@ export default function SessionWatcher({ onLogout }) {
 
             localStorage.setItem('refreshToken', refreshData.refreshToken);
 
+            localStorage.setItem('user', JSON.stringify(refreshData.user));
+            setRefreshing(false);
+
             setShowWarning(false);
           } catch (err) {
             console.log('❌ refresh falló');
@@ -59,6 +65,8 @@ export default function SessionWatcher({ onLogout }) {
         //  logout automático
         if (remaining <= 0) {
           localStorage.removeItem('accessToken');
+          localStorage.removeItem('refreshToken');
+          localStorage.removeItem('user');
 
           onLogout();
         }
@@ -66,6 +74,8 @@ export default function SessionWatcher({ onLogout }) {
         console.log(err);
 
         localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('user');
 
         onLogout();
       }
@@ -168,12 +178,15 @@ export default function SessionWatcher({ onLogout }) {
 
                 localStorage.setItem('accessToken', data.accessToken);
                 localStorage.setItem('refreshToken', data.refreshToken);
+                localStorage.setItem('user', JSON.stringify(data.user));
 
                 setShowWarning(false);
               } catch (err) {
                 console.log(err);
 
                 localStorage.removeItem('accessToken');
+                localStorage.removeItem('refreshToken');
+                localStorage.removeItem('user');
 
                 onLogout();
               }
@@ -195,6 +208,8 @@ export default function SessionWatcher({ onLogout }) {
           <button
             onClick={() => {
               localStorage.removeItem('accessToken');
+              localStorage.removeItem('refreshToken');
+              localStorage.removeItem('user');
 
               onLogout();
             }}

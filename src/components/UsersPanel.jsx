@@ -98,6 +98,41 @@ export default function UsersPanel({ onClose }) {
     }
   };
 
+  const toggleUser = async (id) => {
+    try {
+      const token = localStorage.getItem('accessToken');
+
+      const res = await fetch(`${ENV.API_URL}/users/${id}/toggle-active`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Error actualizando usuario');
+      }
+
+      setMessage({
+        type: 'success',
+        text: data.isActive ? 'Usuario activado' : 'Usuario desactivado',
+      });
+
+      loadUsers();
+
+      setTimeout(() => {
+        setMessage(null);
+      }, 3000);
+    } catch (err) {
+      setMessage({
+        type: 'error',
+        text: err.message,
+      });
+    }
+  };
+
   //  DELETE
   const deleteUser = async (id) => {
     const confirmDelete = confirm('¿Seguro que deseas eliminar este usuario?');
@@ -135,6 +170,33 @@ export default function UsersPanel({ onClose }) {
         type: 'error',
         text: err.message,
       });
+    }
+  };
+
+  const resetPassword = async (id) => {
+    const confirmReset = confirm('¿Resetear password de este usuario?');
+
+    if (!confirmReset) return;
+
+    try {
+      const token = localStorage.getItem('accessToken');
+
+      const res = await fetch(`${ENV.API_URL}/users/${id}/reset-password`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Error reseteando password');
+      }
+
+      alert(`Password temporal:\n\n${data.temporaryPassword}`);
+    } catch (err) {
+      alert(err.message);
     }
   };
 
@@ -389,6 +451,8 @@ export default function UsersPanel({ onClose }) {
 
   rounded-3xl
 
+  flex items-center justify-between gap-4
+
   border border-white/6
 
   bg-white/[0.03]
@@ -401,9 +465,48 @@ export default function UsersPanel({ onClose }) {
   hover:border-cyan-400/15
 "
               >
-                <div>
-                  <div className="text-sm font-medium text-white">{u.name}</div>
-                  <div className="text-xs text-white/35 mt-1">{u.email}</div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <div className="text-sm font-medium text-white">
+                      {u.name}
+                    </div>
+
+                    <div
+                      className={`
+        px-2 py-1 rounded-full text-[10px] font-medium
+
+        ${
+          u.isActive
+            ? 'bg-emerald-400/10 text-emerald-300 border border-emerald-400/20'
+            : 'bg-red-400/10 text-red-300 border border-red-400/20'
+        }
+      `}
+                    >
+                      {u.isActive ? 'ACTIVO' : 'DESACTIVADO'}
+                    </div>
+
+                    {u.role === 'ADMIN' && (
+                      <div className="px-2 py-1 rounded-full text-[10px] bg-cyan-400/10 text-cyan-300 border border-cyan-400/20">
+                        ADMIN
+                      </div>
+                    )}
+
+                    {u.role === 'SUPERVISOR' && (
+                      <div className="px-2 py-1 rounded-full text-[10px] bg-indigo-400/10 text-indigo-300 border border-indigo-400/20">
+                        SUPERVISOR
+                      </div>
+                    )}
+
+                    {u.role === 'USER' && (
+                      <div className="px-2 py-1 rounded-full text-[10px] bg-white/10 text-white/70 border border-white/10">
+                        USER
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="text-xs text-white/35 mt-2 truncate">
+                    {u.email}
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-2 shrink-0">
@@ -446,6 +549,43 @@ export default function UsersPanel({ onClose }) {
                         >
                           ADMIN
                         </option>
+
+                        <button
+                          onClick={() => toggleUser(u.id)}
+                          className={`
+    h-9 px-3
+
+    rounded-xl
+
+    border
+
+    text-xs font-medium
+
+    transition-all duration-200
+
+    ${
+      u.isActive
+        ? `
+          bg-yellow-500/10
+          hover:bg-yellow-500/15
+
+          border-yellow-400/20
+
+          text-yellow-300
+        `
+        : `
+          bg-emerald-500/10
+          hover:bg-emerald-500/15
+
+          border-emerald-400/20
+
+          text-emerald-300
+        `
+    }
+  `}
+                        >
+                          {u.isActive ? 'Desactivar' : 'Activar'}
+                        </button>
                       </select>
 
                       <button
@@ -466,6 +606,27 @@ export default function UsersPanel({ onClose }) {
 "
                       >
                         🗑
+                      </button>
+
+                      <button
+                        onClick={() => resetPassword(u.id)}
+                        className="
+    h-9 px-3
+
+    rounded-xl
+
+    bg-cyan-400/10
+    hover:bg-cyan-400/15
+
+    border border-cyan-400/20
+
+    text-cyan-300
+    text-xs font-medium
+
+    transition-all duration-200
+  "
+                      >
+                        Reset password
                       </button>
                     </>
                   )}
