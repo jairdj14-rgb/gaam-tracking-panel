@@ -248,26 +248,23 @@ export default function CreateZoneModal({
           disabled={!tempZone}
           onClick={onSave}
           className="
-            h-12 px-5
+    px-5 py-3
 
-            rounded-2xl
+    rounded-2xl
 
-            border border-cyan-400/20
+    bg-cyan-400/[0.18]
+    hover:bg-cyan-400/[0.28]
 
-           bg-cyan-400/[0.18]
-hover:bg-cyan-400/[0.24]
+    border border-cyan-400/30
 
-            text-cyan-300
+    shadow-[0_4px_25px_rgba(34,211,238,0.22)]
 
-            font-medium
+    text-cyan-200
 
-            transition-all duration-300
+    font-medium
 
-            shadow-[0_4px_20px_rgba(34,211,238,0.18)]
-
-            disabled:opacity-40
-            disabled:cursor-not-allowed
-          "
+    transition-all duration-200
+  "
         >
           💾 Guardar zona
         </button>
