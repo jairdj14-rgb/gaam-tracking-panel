@@ -37,6 +37,7 @@ export default function Sidebar({
   setSearchResults,
   setShowCompaniesPanel,
   setShowAuditPanel,
+  setShowGlobalAdmins,
 }) {
   const [showZones, setShowZones] = useState(false);
   const [openZoneId, setOpenZoneId] = useState(null);
@@ -684,7 +685,7 @@ export default function Sidebar({
             </button>
 
             <button
-              onClick={() => toast('Próximamente')}
+              onClick={() => setShowGlobalAdmins(true)}
               className={`${actionButton} shimmer-button`}
             >
               👑 Admins globales
