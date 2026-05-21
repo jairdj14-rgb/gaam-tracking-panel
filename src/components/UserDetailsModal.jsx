@@ -228,7 +228,7 @@ export default function UserDetailsModal({
                   transition-all
                 "
                 >
-                  📸 Subir
+                  📸 Subir evidencia
                 </div>
 
                 <input
