@@ -133,25 +133,20 @@ const ZoneCircle = React.memo(
               map?.flyTo([zone.lat, zone.lng], 16, {
                 duration: 1.2,
               });
-            },
 
-            dblclick: (e) => {
-              L.DomEvent.stopPropagation(e);
+              //  DOBLE CLICK
+              if (e.originalEvent.detail === 2) {
+                setIsEditingZone(true);
 
-              setSelectedZone(zone);
+                setIsAdjustingZone(true);
 
-              setOriginalZone(zone);
+                setSidebarOpen(false);
 
-              setIsEditingZone(true);
-
-              setIsAdjustingZone(true);
-
-              setSidebarOpen(false);
-
-              setFlyToZone({
-                lat: zone.lat ?? zone.centerLat,
-                lng: zone.lng ?? zone.centerLng,
-              });
+                setFlyToZone({
+                  lat: zone.lat ?? zone.centerLat,
+                  lng: zone.lng ?? zone.centerLng,
+                });
+              }
             },
           }}
         />

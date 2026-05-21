@@ -204,58 +204,82 @@ export default function CreateZoneModal({
       </div>
 
       {/* FLOATING ACTIONS */}
-
-      <button
-        onClick={() => {
-          setCreatingZone(false);
-
-          setTempZone(null);
-
-          setSearchResults([]);
-        }}
+      <div
         className="
-            h-12 px-5
+    absolute
 
-            rounded-2xl
+    bottom-5 left-1/2 -translate-x-1/2
 
-            border border-white/10
+    z-[5000]
 
-            bg-white/[0.08]
-            hover:bg-white/[0.14]
+    flex items-center gap-3
 
-            text-white/90
-            hover:text-white
+    rounded-3xl
 
-            transition-all duration-300
-          "
-      >
-        Cancelar
-      </button>
+    border border-white/10
 
-      <button
-        disabled={!tempZone}
-        onClick={onSave}
-        className="
-    px-5 py-3
+    bg-[#06111f]/92
+    backdrop-blur-2xl
 
-    rounded-2xl
+    shadow-[0_20px_80px_rgba(0,0,0,0.45)]
 
-    bg-cyan-400/[0.18]
-    hover:bg-cyan-400/[0.28]
-
-    border border-cyan-400/30
-
-    shadow-[0_4px_25px_rgba(34,211,238,0.22)]
-
-    text-cyan-200
-
-    font-medium
-
-    transition-all duration-200
+    p-3
   "
       >
-        💾 Guardar zona
-      </button>
+        <button
+          onClick={() => {
+            setCreatingZone(false);
+
+            setTempZone(null);
+
+            setSearchResults([]);
+          }}
+          className="
+      h-12 px-5
+
+      rounded-2xl
+
+      border border-white/10
+
+      bg-white/[0.08]
+      hover:bg-white/[0.14]
+
+      text-white/90
+      hover:text-white
+
+      transition-all duration-300
+    "
+        >
+          ❌ Cancelar
+        </button>
+
+        <button
+          disabled={!tempZone}
+          onClick={onSave}
+          className="
+      h-12 px-5
+
+      rounded-2xl
+
+      bg-cyan-400/[0.18]
+      hover:bg-cyan-400/[0.28]
+
+      border border-cyan-400/30
+
+      shadow-[0_4px_25px_rgba(34,211,238,0.22)]
+
+      text-cyan-200
+
+      font-medium
+
+      transition-all duration-200
+
+      disabled:opacity-40
+    "
+        >
+          💾 Guardar zona
+        </button>
+      </div>
     </>
   );
 }
