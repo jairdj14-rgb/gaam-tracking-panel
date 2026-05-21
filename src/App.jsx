@@ -156,9 +156,9 @@ export default function App() {
 
       setTimeline((prev) => [
         {
-          type: 'ALERT',
+          type: alert.type,
           timestamp: alert.createdAt,
-          data: alert,
+          message: alert.message,
         },
 
         ...prev,
@@ -178,9 +178,9 @@ export default function App() {
 
       setTimeline((prev) => [
         {
-          type: 'ZONE',
+          type: event.type,
           timestamp: event.createdAt,
-          data: event,
+          message: event.type === 'ENTER' ? `Entró a zona` : `Salió de zona`,
         },
 
         ...prev,
