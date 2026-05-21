@@ -661,23 +661,19 @@ export default function MapView({
 
               setIsAdjustingZone(false);
             }}
-            className="
-    px-5 py-3
+            className={`
+        ${overlayCard}
 
-    rounded-2xl
+        px-5 py-3
 
-    bg-white/[0.12]
-    hover:bg-white/[0.18]
+        border-cyan-400/20
 
-    border border-white/15
+        text-cyan-300
 
-    shadow-[0_4px_20px_rgba(0,0,0,0.25)]
+        hover:bg-cyan-400/10
 
-    text-white/90
-    hover:text-white
-
-    transition-all duration-200
-  "
+        transition-all duration-200
+      `}
           >
             ❌ Cancelar
           </button>

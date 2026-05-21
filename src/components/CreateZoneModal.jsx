@@ -13,18 +13,6 @@ export default function CreateZoneModal({
   onSave,
   selectPlace,
 }) {
-  const overlayCard = `
-  rounded-3xl
-
-  border border-white/10
-
-  bg-[#06111f]/80
-  backdrop-blur-2xl
-
-  shadow-[0_20px_60px_rgba(0,0,0,0.45)]
-
-  text-white
-`;
   return (
     <>
       {/* SEARCH */}
@@ -216,30 +204,16 @@ export default function CreateZoneModal({
       </div>
 
       {/* FLOATING ACTIONS */}
-      <div
-        className={`
-        ${overlayCard}
 
-        px-5 py-3
+      <button
+        onClick={() => {
+          setCreatingZone(false);
 
-        border-cyan-400/20
+          setTempZone(null);
 
-        text-cyan-300
-
-        hover:bg-cyan-400/10
-
-        transition-all duration-200
-      `}
-      >
-        <button
-          onClick={() => {
-            setCreatingZone(false);
-
-            setTempZone(null);
-
-            setSearchResults([]);
-          }}
-          className="
+          setSearchResults([]);
+        }}
+        className="
             h-12 px-5
 
             rounded-2xl
@@ -254,14 +228,14 @@ export default function CreateZoneModal({
 
             transition-all duration-300
           "
-        >
-          Cancelar
-        </button>
+      >
+        Cancelar
+      </button>
 
-        <button
-          disabled={!tempZone}
-          onClick={onSave}
-          className="
+      <button
+        disabled={!tempZone}
+        onClick={onSave}
+        className="
     px-5 py-3
 
     rounded-2xl
@@ -279,10 +253,9 @@ export default function CreateZoneModal({
 
     transition-all duration-200
   "
-        >
-          💾 Guardar zona
-        </button>
-      </div>
+      >
+        💾 Guardar zona
+      </button>
     </>
   );
 }
