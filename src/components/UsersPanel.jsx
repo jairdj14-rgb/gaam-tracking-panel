@@ -81,7 +81,11 @@ export default function UsersPanel({ onClose }) {
 
       if (!res.ok) {
         const err = await res.json();
-        throw new Error(err.message || 'Error creando usuario');
+        throw new Error(
+          Array.isArray(err.message)
+            ? err.message[0]
+            : err.message || 'Error creando usuario',
+        );
       }
 
       setMessage({ type: 'success', text: 'Usuario creado' });

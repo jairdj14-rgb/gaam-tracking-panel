@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useIncidentsStore } from '../store/incidentsStore';
 import { ENV } from '../env';
+import toast from 'react-hot-toast';
 
 export default function Sidebar({
   users,
@@ -215,7 +216,7 @@ export default function Sidebar({
       </div>
       <div className="flex-1 overflow-y-auto overflow-x-hidden px-5 py-4 space-y-3">
         {/* CREAR ZONA */}
-        {role === 'ADMIN' && (
+        {['ADMIN', 'SUPER_ADMIN'].includes(role) && (
           <>
             {!creatingZone ? (
               <button
@@ -272,7 +273,7 @@ export default function Sidebar({
           📍 Zonas
         </button>
         {/* 📍 INDICADOR */}
-        {creatingZone && role === 'ADMIN' && (
+        {creatingZone && ['ADMIN', 'SUPER_ADMIN'].includes(role) && (
           <div className="mb-2 text-sm text-cyan-400">
             📍 Haz click en el mapa
           </div>
@@ -367,7 +368,7 @@ export default function Sidebar({
                     </div>
                   </div>
 
-                  {role === 'ADMIN' && (
+                  {['ADMIN', 'SUPER_ADMIN'].includes(role) && (
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -655,7 +656,7 @@ export default function Sidebar({
           </div>
         )}
 
-        {role === 'ADMIN' && (
+        {['ADMIN', 'SUPER_ADMIN'].includes(role) && (
           <button
             onClick={() => setShowUsersPanel(true)}
             className={`${actionButton} shimmer-button`}
@@ -664,7 +665,7 @@ export default function Sidebar({
           </button>
         )}
 
-        {role === 'ADMIN' && (
+        {['ADMIN', 'SUPER_ADMIN'].includes(role) && (
           <button
             onClick={() => setShowCompanySettings(true)}
             className={`${actionButton} shimmer-button`}
@@ -682,17 +683,24 @@ export default function Sidebar({
               🏢 Empresas
             </button>
 
-            <button className={`${actionButton} shimmer-button`}>
+            <button
+              onClick={() => toast('Próximamente')}
+              className={`${actionButton} shimmer-button`}
+            >
               👑 Admins globales
             </button>
 
-            <button className={`${actionButton} shimmer-button`}>
+            <button
               onClick={() => setShowAuditPanel(true)}
               className={`${actionButton} shimmer-button`}
+            >
               🕒 Auditoría
             </button>
 
-            <button className={`${actionButton} shimmer-button`}>
+            <button
+              onClick={() => toast('Próximamente')}
+              className={`${actionButton} shimmer-button`}
+            >
               📊 Reportes globales
             </button>
           </>

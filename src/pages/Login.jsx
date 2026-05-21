@@ -132,15 +132,24 @@ export default function Login({ onLogin }) {
         )}
 
         {/* INPUTS */}
-        <div className="space-y-4">
-          <div>
-            <div className="text-xs text-gray-400 mb-2">Correo empresarial</div>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleLogin();
+          }}
+          className="space-y-4"
+        >
+          <div className="space-y-4">
+            <div>
+              <div className="text-xs text-gray-400 mb-2">
+                Correo empresarial
+              </div>
 
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="empresa@correo.com"
-              className="
+              <input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="empresa@correo.com"
+                className="
               w-full
               bg-black/20
               border border-white/10
@@ -155,18 +164,18 @@ export default function Login({ onLogin }) {
               focus:border-cyan-400/40
               transition
             "
-            />
-          </div>
+              />
+            </div>
 
-          <div>
-            <div className="text-xs text-gray-400 mb-2">Contraseña</div>
+            <div>
+              <div className="text-xs text-gray-400 mb-2">Contraseña</div>
 
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                className="
               w-full
               bg-black/20
               border border-white/10
@@ -181,15 +190,14 @@ export default function Login({ onLogin }) {
               focus:border-cyan-400/40
               transition
             "
-            />
-          </div>
-        </div>
+              />
+            </div>
 
-        {/* BUTTON */}
-        <button
-          onClick={handleLogin}
-          disabled={loading}
-          className="
+            {/* BUTTON */}
+            <button
+              disabled={loading}
+              type="submit"
+              className="
           w-full
           mt-6
 
@@ -205,10 +213,14 @@ export default function Login({ onLogin }) {
           transition
           shadow-lg
           shadow-cyan-500/20
+
+          
         "
-        >
-          {loading ? 'Ingresando...' : 'Iniciar sesión'}
-        </button>
+            >
+              {loading ? 'Ingresando...' : 'Iniciar sesión'}
+            </button>
+          </div>
+        </form>
 
         {/* FOOTER */}
         <div className="mt-6 text-center text-xs text-gray-500">

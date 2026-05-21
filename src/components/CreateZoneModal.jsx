@@ -232,10 +232,10 @@ export default function CreateZoneModal({
 
             border border-white/10
 
-            bg-white/[0.04]
-            hover:bg-white/[0.08]
+            bg-white/[0.08]
+            hover:bg-white/[0.14]
 
-            text-white/70
+            text-white/90
             hover:text-white
 
             transition-all duration-300
@@ -254,14 +254,16 @@ export default function CreateZoneModal({
 
             border border-cyan-400/20
 
-            bg-cyan-400/[0.10]
-            hover:bg-cyan-400/[0.16]
+           bg-cyan-400/[0.18]
+hover:bg-cyan-400/[0.24]
 
             text-cyan-300
 
             font-medium
 
             transition-all duration-300
+
+            shadow-[0_4px_20px_rgba(34,211,238,0.18)]
 
             disabled:opacity-40
             disabled:cursor-not-allowed
