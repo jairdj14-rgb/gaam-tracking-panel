@@ -46,6 +46,10 @@ export default function Login({ onLogin }) {
 
       localStorage.setItem('user', JSON.stringify(data.user));
 
+      if (data.mustChangePassword) {
+        localStorage.setItem('mustChangePassword', 'true');
+      }
+
       toast.success('Bienvenido');
 
       setTimeout(() => {

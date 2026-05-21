@@ -24,6 +24,7 @@ import CompaniesPanel from './components/CompaniesPanel';
 import AuditLogsPanel from './components/AuditLogsPanel';
 import GlobalAdminsModal from './components/GlobalAdminsModal';
 import GlobalReportsModal from './components/GlobalReportsModal';
+import ForcePasswordChangeModal from './components/ForcePasswordChangeModal';
 
 export default function App() {
   const currentUser = JSON.parse(localStorage.getItem('user') || 'null');
@@ -52,6 +53,10 @@ export default function App() {
   const [showCompanySettings, setShowCompanySettings] = useState(false);
 
   const [showGlobalReports, setShowGlobalReports] = useState(false);
+
+  const [showForcePasswordModal, setShowForcePasswordModal] = useState(
+    localStorage.getItem('mustChangePassword') === 'true',
+  );
 
   const lastClickRef = useRef(0);
 
@@ -571,6 +576,16 @@ export default function App() {
       </div>
 
       <SessionWatcher onLogout={handleLogout} />
+
+      {showForcePasswordModal && (
+        <ForcePasswordChangeModal
+          onSuccess={() => {
+            localStorage.removeItem('mustChangePassword');
+
+            setShowForcePasswordModal(false);
+          }}
+        />
+      )}
 
       {showUsersPanel && (
         <UsersPanel onClose={() => setShowUsersPanel(false)} />
