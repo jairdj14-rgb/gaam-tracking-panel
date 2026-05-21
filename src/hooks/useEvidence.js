@@ -43,6 +43,11 @@ export default function useEvidence({ selectedUserId, liveUser }) {
     formData.append('lng', liveUser.lng);
 
     try {
+      console.log('ENV.API_URL:', ENV.API_URL);
+
+      console.log('imageUrl:', event.imageUrl);
+
+      console.log('FULL:', `${ENV.API_URL}${event.imageUrl}`);
       const res = await fetch(`${ENV.API_URL}/evidence/upload`, {
         method: 'POST',
         headers: {
