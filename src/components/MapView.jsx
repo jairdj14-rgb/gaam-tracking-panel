@@ -692,24 +692,19 @@ export default function MapView({
 
               setIsAdjustingZone(false);
             }}
-            className="
-    px-5 py-3
+            className={`
+        ${overlayCard}
 
-    rounded-2xl
+        px-5 py-3
 
-    bg-cyan-400/[0.18]
-    hover:bg-cyan-400/[0.28]
+        border-cyan-400/20
 
-    border border-cyan-400/30
+        text-cyan-300
 
-    shadow-[0_4px_25px_rgba(34,211,238,0.22)]
+        hover:bg-cyan-400/10
 
-    text-cyan-200
-
-    font-medium
-
-    transition-all duration-200
-  "
+        transition-all duration-200
+      `}
           >
             💾 Guardar
           </button>

@@ -13,6 +13,18 @@ export default function CreateZoneModal({
   onSave,
   selectPlace,
 }) {
+  const overlayCard = `
+  rounded-3xl
+
+  border border-white/10
+
+  bg-[#06111f]/80
+  backdrop-blur-2xl
+
+  shadow-[0_20px_60px_rgba(0,0,0,0.45)]
+
+  text-white
+`;
   return (
     <>
       {/* SEARCH */}
@@ -205,17 +217,19 @@ export default function CreateZoneModal({
 
       {/* FLOATING ACTIONS */}
       <div
-        className="
-    absolute
+        className={`
+        ${overlayCard}
 
-    bottom-4 left-4 right-4 md:left-auto md:right-6
+        px-5 py-3
 
-       pointer-events-auto
+        border-cyan-400/20
 
-    z-[5000]
+        text-cyan-300
 
-    flex flex-col md:flex-row items-center gap-3
-  "
+        hover:bg-cyan-400/10
+
+        transition-all duration-200
+      `}
       >
         <button
           onClick={() => {
