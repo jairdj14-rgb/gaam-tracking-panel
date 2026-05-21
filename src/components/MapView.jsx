@@ -79,6 +79,8 @@ const MapClickHandler = ({ creatingZone, setTempZone }) => {
   return null;
 };
 
+const clickTimeoutRef = useRef(null);
+
 const ZoneCircle = React.memo(
   ({
     zone,
@@ -129,21 +131,9 @@ const ZoneCircle = React.memo(
 
               const map = e.target._map;
 
-              map?.flyTo([zone.lat, zone.lng], 16, {
-                duration: 1.2,
-              });
-
-              // MOBILE + DESKTOP
-              if (e.originalEvent.detail === 2) {
-                setIsEditingZone(true);
-
-                setIsAdjustingZone(true);
-
-                setSidebarOpen(false);
-
-                setFlyToZone({
-                  lat: zone.lat ?? zone.centerLat,
-                  lng: zone.lng ?? zone.centerLng,
+              if (map && typeof map.flyTo === 'function') {
+                map.flyTo([zone.lat, zone.lng], 16, {
+                  duration: 1.2,
                 });
               }
             },
