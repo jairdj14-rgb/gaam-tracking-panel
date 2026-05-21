@@ -32,12 +32,12 @@ export default function Sidebar({
   setSidebarOpen,
   search,
   setSearch,
-
   searchResults,
   setSearchResults,
   setShowCompaniesPanel,
   setShowAuditPanel,
   setShowGlobalAdmins,
+  setShowGlobalReports,
 }) {
   const [showZones, setShowZones] = useState(false);
   const [openZoneId, setOpenZoneId] = useState(null);
@@ -699,7 +699,7 @@ export default function Sidebar({
             </button>
 
             <button
-              onClick={() => toast('Próximamente')}
+              onClick={() => setShowGlobalReports(true)}
               className={`${actionButton} shimmer-button`}
             >
               📊 Reportes globales

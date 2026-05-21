@@ -23,6 +23,7 @@ import { ENV } from './env';
 import CompaniesPanel from './components/CompaniesPanel';
 import AuditLogsPanel from './components/AuditLogsPanel';
 import GlobalAdminsModal from './components/GlobalAdminsModal';
+import GlobalReportsModal from './components/GlobalReportsModal';
 
 export default function App() {
   const currentUser = JSON.parse(localStorage.getItem('user') || 'null');
@@ -49,6 +50,8 @@ export default function App() {
 
   const [showReports, setShowReports] = useState(false);
   const [showCompanySettings, setShowCompanySettings] = useState(false);
+
+  const [showGlobalReports, setShowGlobalReports] = useState(false);
 
   const lastClickRef = useRef(0);
 
@@ -526,6 +529,7 @@ export default function App() {
         setShowUsersPanel={setShowUsersPanel}
         setShowCompaniesPanel={setShowCompaniesPanel}
         setShowGlobalAdmins={setShowGlobalAdmins}
+        setShowGlobalReports={setShowGlobalReports}
         setShowAuditPanel={setShowAuditPanel}
         zoneEvents={zoneEvents}
         onSelectUser={handleSelectUser}
@@ -579,6 +583,9 @@ export default function App() {
       )}
       {showAuditPanel && (
         <AuditLogsPanel onClose={() => setShowAuditPanel(false)} />
+      )}
+      {showGlobalReports && (
+        <GlobalReportsModal onClose={() => setShowGlobalReports(false)} />
       )}
       {showCompanySettings && (
         <CompanySettingsModal onClose={() => setShowCompanySettings(false)} />
