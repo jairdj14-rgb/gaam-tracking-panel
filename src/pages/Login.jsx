@@ -5,6 +5,7 @@ import { ENV } from '../env';
 export default function Login({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -170,27 +171,46 @@ export default function Login({ onLogin }) {
             <div>
               <div className="text-xs text-gray-400 mb-2">Contraseña</div>
 
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                className="
-              w-full
-              bg-black/20
-              border border-white/10
+              <div className="relative">
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  className="
+        w-full
+        bg-black/20
+        border border-white/10
 
-              rounded-xl
-              p-3
+        rounded-xl
+        p-3 pr-12
 
-              text-white
-              placeholder:text-gray-500
+        text-white
+        placeholder:text-gray-500
 
-              outline-none
-              focus:border-cyan-400/40
-              transition
-            "
-              />
+        outline-none
+        focus:border-cyan-400/40
+
+        transition
+      "
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="
+        absolute right-3 top-1/2
+        -translate-y-1/2
+
+        text-white/40
+        hover:text-cyan-300
+
+        transition-all
+      "
+                >
+                  {showPassword ? '🙈' : '👁️'}
+                </button>
+              </div>
             </div>
 
             {/* BUTTON */}
