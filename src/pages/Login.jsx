@@ -35,7 +35,8 @@ export default function Login({ onLogin }) {
       toast.dismiss(loading);
 
       if (!data.accessToken) {
-        toast.error('Credenciales inválidas');
+        toast.error(data.message || 'Credenciales inválidas');
+
         return;
       }
 
