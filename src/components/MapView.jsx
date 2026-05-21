@@ -79,8 +79,6 @@ const MapClickHandler = ({ creatingZone, setTempZone }) => {
   return null;
 };
 
-const clickTimeoutRef = useRef(null);
-
 const ZoneCircle = React.memo(
   ({
     zone,
