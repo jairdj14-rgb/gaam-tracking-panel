@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ENV } from '../env';
 
 export default function UserDetailsModal({
@@ -13,6 +13,8 @@ export default function UserDetailsModal({
   loadingTimeline,
   selectedUserId,
 }) {
+  const [fullscreenImage, setFullscreenImage] = useState(null);
+
   useEffect(() => {
     const handler = (e) => {};
 
@@ -268,16 +270,20 @@ export default function UserDetailsModal({
                       >
                         <img
                           src={`${ENV.API_URL}${e.imageUrl}`}
-                          className="w-full h-28 object-cover"
-                          onError={() => {
-                            console.log('❌ IMAGE ERROR');
+                          className="
+    w-full
+    h-28
+    object-cover
 
-                            console.log('ENV.API_URL:', ENV.API_URL);
+    cursor-zoom-in
 
-                            console.log('imageUrl:', e.imageUrl);
+    transition-transform duration-300
 
-                            console.log('FULL:', `${ENV.API_URL}${e.imageUrl}`);
-                          }}
+    hover:scale-[1.02]
+  "
+                          onClick={() =>
+                            setFullscreenImage(`${ENV.API_URL}${e.imageUrl}`)
+                          }
                         />
 
                         <div className="p-2 text-[10px] text-white/35 text-center">
@@ -370,19 +376,16 @@ export default function UserDetailsModal({
     object-cover
     rounded-2xl
     border border-white/10
+
+    cursor-zoom-in
+
+    transition-transform duration-300
+
+    hover:scale-[1.01]
   "
-                        onError={() => {
-                          console.log('❌ TIMELINE IMAGE ERROR');
-
-                          console.log('ENV.API_URL:', ENV.API_URL);
-
-                          console.log('imageUrl:', event.imageUrl);
-
-                          console.log(
-                            'FULL:',
-                            `${ENV.API_URL}${event.imageUrl}`,
-                          );
-                        }}
+                        onClick={() =>
+                          setFullscreenImage(`${ENV.API_URL}${event.imageUrl}`)
+                        }
                       />
                     )}
                   </div>
@@ -422,6 +425,58 @@ export default function UserDetailsModal({
           </button>
         </div>
       </div>
+      {fullscreenImage && (
+        <div
+          className="
+      fixed inset-0 z-[10000]
+
+      bg-black/90
+      backdrop-blur-xl
+
+      flex items-center justify-center
+
+      p-4
+    "
+          onClick={() => setFullscreenImage(null)}
+        >
+          <img
+            src={fullscreenImage}
+            className="
+        max-w-full
+        max-h-full
+
+        object-contain
+
+        rounded-3xl
+
+        shadow-[0_20px_80px_rgba(0,0,0,0.65)]
+      "
+            onClick={(e) => e.stopPropagation()}
+          />
+
+          <button
+            onClick={() => setFullscreenImage(null)}
+            className="
+        absolute top-5 right-5
+
+        w-12 h-12
+
+        rounded-2xl
+
+        bg-white/10
+        hover:bg-white/20
+
+        border border-white/10
+
+        text-white text-xl
+
+        transition-all
+      "
+          >
+            ✕
+          </button>
+        </div>
+      )}
     </div>
   );
 }
