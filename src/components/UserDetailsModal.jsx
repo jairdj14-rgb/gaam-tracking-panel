@@ -269,6 +269,15 @@ export default function UserDetailsModal({
                         <img
                           src={`${ENV.API_URL}${e.imageUrl}`}
                           className="w-full h-28 object-cover"
+                          onError={() => {
+                            console.log('❌ IMAGE ERROR');
+
+                            console.log('ENV.API_URL:', ENV.API_URL);
+
+                            console.log('imageUrl:', e.imageUrl);
+
+                            console.log('FULL:', `${ENV.API_URL}${e.imageUrl}`);
+                          }}
                         />
 
                         <div className="p-2 text-[10px] text-white/35 text-center">
@@ -355,13 +364,25 @@ export default function UserDetailsModal({
                       <img
                         src={`${ENV.API_URL}${event.imageUrl}`}
                         className="
-      mt-3
-      w-full
-      h-44
-      object-cover
-      rounded-2xl
-      border border-white/10
-    "
+    mt-3
+    w-full
+    h-44
+    object-cover
+    rounded-2xl
+    border border-white/10
+  "
+                        onError={() => {
+                          console.log('❌ TIMELINE IMAGE ERROR');
+
+                          console.log('ENV.API_URL:', ENV.API_URL);
+
+                          console.log('imageUrl:', event.imageUrl);
+
+                          console.log(
+                            'FULL:',
+                            `${ENV.API_URL}${event.imageUrl}`,
+                          );
+                        }}
                       />
                     )}
                   </div>
