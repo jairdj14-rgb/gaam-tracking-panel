@@ -58,6 +58,10 @@ export default function App() {
     localStorage.getItem('mustChangePassword') === 'true',
   );
 
+  const handleForcePasswordRequired = () => {
+    setShowForcePasswordModal(true);
+  };
+
   const lastClickRef = useRef(0);
 
   const {
@@ -345,7 +349,12 @@ export default function App() {
 
   //  LOGIN GATE
   if (!isLogged) {
-    return <Login onLogin={() => setIsLogged(true)} />;
+    return (
+      <Login
+        onLogin={() => setIsLogged(true)}
+        onForcePasswordRequired={() => setShowForcePasswordModal(true)}
+      />
+    );
   }
 
   if (!appReady) {
