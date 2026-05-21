@@ -640,24 +640,26 @@ export default function MapView({
       {isAdjustingZone && selectedZone && (
         <div
           className="
-  absolute
+      absolute
 
-  bottom-4 left-4 right-4 md:left-auto md:right-6
+      bottom-4 left-4 right-4 md:left-auto md:right-6
 
-  z-[1000]
+      z-[1000]
 
-  flex flex-col md:flex-row items-center gap-3
+      flex flex-col md:flex-row items-center gap-3
 
-  p-4
+      p-4
 
-  rounded-3xl
+      rounded-3xl
 
-  bg-[#06111f]
+      border border-white/10
 
-  border border-white/10
+      bg-[#06111f]/85
 
-  shadow-2xl
-"
+      backdrop-blur-2xl
+
+      shadow-[0_20px_60px_rgba(0,0,0,0.35)]
+    "
         >
           <button
             onClick={() => {
@@ -668,22 +670,20 @@ export default function MapView({
               setIsAdjustingZone(false);
             }}
             className="
-        px-5 py-3
+            h-12 px-5
 
-        rounded-2xl
+            rounded-2xl
 
-        bg-white/[0.12]
-        hover:bg-white/[0.18]
+            border border-white/10
 
-        border border-white/15
+            bg-white/[0.08]
+            hover:bg-white/[0.14]
 
-        shadow-[0_4px_20px_rgba(0,0,0,0.25)]
+            text-white/90
+            hover:text-white
 
-        text-white/90
-        hover:text-white
-
-        transition-all duration-200
-      "
+            transition-all duration-300
+          "
           >
             ❌ Cancelar
           </button>
@@ -699,23 +699,26 @@ export default function MapView({
               setIsAdjustingZone(false);
             }}
             className="
-        px-5 py-3
+            h-12 px-5
 
-        rounded-2xl
+            rounded-2xl
 
-        bg-cyan-400/[0.18]
-        hover:bg-cyan-400/[0.28]
+            border border-cyan-400/20
 
-        border border-cyan-400/30
+           bg-cyan-400/[0.18]
+hover:bg-cyan-400/[0.24]
 
-        shadow-[0_4px_25px_rgba(34,211,238,0.22)]
+            text-cyan-300
 
-        text-cyan-200
+            font-medium
 
-        font-medium
+            transition-all duration-300
 
-        transition-all duration-200
-      "
+            shadow-[0_4px_20px_rgba(34,211,238,0.18)]
+
+            disabled:opacity-40
+            disabled:cursor-not-allowed
+          "
           >
             💾 Guardar
           </button>
