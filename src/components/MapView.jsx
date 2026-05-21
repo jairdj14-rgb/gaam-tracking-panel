@@ -639,7 +639,9 @@ export default function MapView({
       </MapContainer>
       {isAdjustingZone && selectedZone && (
         <div
-          className="
+          className={`
+      ${overlayCard}
+
       absolute
 
       bottom-4 left-4 right-4 md:left-auto md:right-6
@@ -648,18 +650,8 @@ export default function MapView({
 
       flex flex-col md:flex-row items-center gap-3
 
-      p-4
-
-      rounded-3xl
-
-      border border-white/10
-
-      bg-[#06111f]/85
-
-      backdrop-blur-2xl
-
-      shadow-[0_20px_60px_rgba(0,0,0,0.35)]
-    "
+      p-3
+    `}
         >
           <button
             onClick={() => {
@@ -674,13 +666,15 @@ export default function MapView({
 
     rounded-2xl
 
-    bg-red-500
-    hover:bg-red-400
+    bg-white/[0.12]
+    hover:bg-white/[0.18]
 
-    text-white
-    font-semibold
+    border border-white/15
 
-    shadow-lg
+    shadow-[0_4px_20px_rgba(0,0,0,0.25)]
+
+    text-white/90
+    hover:text-white
 
     transition-all duration-200
   "
@@ -703,13 +697,16 @@ export default function MapView({
 
     rounded-2xl
 
-    bg-cyan-500
-    hover:bg-cyan-400
+    bg-cyan-400/[0.18]
+    hover:bg-cyan-400/[0.28]
 
-    text-black
-    font-semibold
+    border border-cyan-400/30
 
-    shadow-lg
+    shadow-[0_4px_25px_rgba(34,211,238,0.22)]
+
+    text-cyan-200
+
+    font-medium
 
     transition-all duration-200
   "
@@ -722,7 +719,7 @@ export default function MapView({
       {selectedZone && isAdjustingZone && (
         <div
           className={`
-      
+      ${overlayCard}
 
       absolute top-5 right-5 z-[1000]
 
