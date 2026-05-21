@@ -661,15 +661,23 @@ export default function MapView({
 
               setIsAdjustingZone(false);
             }}
-            className={`
-        ${overlayCard}
+            className="
+    px-5 py-3
 
-        px-5 py-3
+    rounded-2xl
 
-        hover:bg-white/[0.06]
+    bg-white/[0.12]
+    hover:bg-white/[0.18]
 
-        transition-all duration-200
-      `}
+    border border-white/15
+
+    shadow-[0_4px_20px_rgba(0,0,0,0.25)]
+
+    text-white/90
+    hover:text-white
+
+    transition-all duration-200
+  "
           >
             ❌ Cancelar
           </button>
@@ -684,19 +692,24 @@ export default function MapView({
 
               setIsAdjustingZone(false);
             }}
-            className={`
-        ${overlayCard}
+            className="
+    px-5 py-3
 
-        px-5 py-3
+    rounded-2xl
 
-        border-cyan-400/20
+    bg-cyan-400/[0.18]
+    hover:bg-cyan-400/[0.28]
 
-        text-cyan-300
+    border border-cyan-400/30
 
-        hover:bg-cyan-400/10
+    shadow-[0_4px_25px_rgba(34,211,238,0.22)]
 
-        transition-all duration-200
-      `}
+    text-cyan-200
+
+    font-medium
+
+    transition-all duration-200
+  "
           >
             💾 Guardar
           </button>

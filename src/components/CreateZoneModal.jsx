@@ -247,27 +247,19 @@ export default function CreateZoneModal({
         <button
           disabled={!tempZone}
           onClick={onSave}
-          className="
-            h-12 px-5
+          className={`
+        ${overlayCard}
 
-            rounded-2xl
+        px-5 py-3
 
-            border border-cyan-400/20
+        border-cyan-400/20
 
-           bg-cyan-400/[0.18]
-hover:bg-cyan-400/[0.24]
+        text-cyan-300
 
-            text-cyan-300
+        hover:bg-cyan-400/10
 
-            font-medium
-
-            transition-all duration-300
-
-            shadow-[0_4px_20px_rgba(34,211,238,0.18)]
-
-            disabled:opacity-40
-            disabled:cursor-not-allowed
-          "
+        transition-all duration-200
+      `}
         >
           💾 Guardar zona
         </button>
