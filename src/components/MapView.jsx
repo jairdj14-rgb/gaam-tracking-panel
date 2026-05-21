@@ -670,20 +670,20 @@ export default function MapView({
               setIsAdjustingZone(false);
             }}
             className="
-            h-12 px-5
+    px-5 py-3
 
-            rounded-2xl
+    rounded-2xl
 
-            border border-white/10
+    bg-red-500
+    hover:bg-red-400
 
-            bg-white/[0.08]
-            hover:bg-white/[0.14]
+    text-white
+    font-semibold
 
-            text-white/90
-            hover:text-white
+    shadow-lg
 
-            transition-all duration-300
-          "
+    transition-all duration-200
+  "
           >
             ❌ Cancelar
           </button>
@@ -699,26 +699,20 @@ export default function MapView({
               setIsAdjustingZone(false);
             }}
             className="
-            h-12 px-5
+    px-5 py-3
 
-            rounded-2xl
+    rounded-2xl
 
-            border border-cyan-400/20
+    bg-cyan-500
+    hover:bg-cyan-400
 
-           bg-cyan-400/[0.18]
-hover:bg-cyan-400/[0.24]
+    text-black
+    font-semibold
 
-            text-cyan-300
+    shadow-lg
 
-            font-medium
-
-            transition-all duration-300
-
-            shadow-[0_4px_20px_rgba(34,211,238,0.18)]
-
-            disabled:opacity-40
-            disabled:cursor-not-allowed
-          "
+    transition-all duration-200
+  "
           >
             💾 Guardar
           </button>
