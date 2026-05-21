@@ -458,6 +458,7 @@ export default function MapView({
         doubleClickZoom={false}
         zoomControl={true}
         zoomAnimation={true}
+        preferCanvas={true}
       >
         <FlyToZone flyToZone={flyToZone} />
         <MapClickHandler
