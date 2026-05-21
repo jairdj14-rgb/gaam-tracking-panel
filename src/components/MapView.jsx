@@ -727,7 +727,7 @@ export default function MapView({
       {selectedZone && isAdjustingZone && (
         <div
           className={`
-      ${overlayCard}
+      
 
       absolute top-5 right-5 z-[1000]
 
