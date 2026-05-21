@@ -702,7 +702,7 @@ export default function MapView({
         transition-all duration-200
       `}
           >
-            💾 Guardar
+            💾 Guardar edición
           </button>
         </div>
       )}
