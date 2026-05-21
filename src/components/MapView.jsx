@@ -123,9 +123,8 @@ const ZoneCircle = React.memo(
           }}
           eventHandlers={{
             click: (e) => {
-              L.DomEvent.stopPropagation(e);
-
               setSelectedZone(zone);
+
               setOriginalZone(zone);
 
               const map = e.target._map;
@@ -134,7 +133,7 @@ const ZoneCircle = React.memo(
                 duration: 1.2,
               });
 
-              //  DOBLE CLICK
+              // MOBILE + DESKTOP
               if (e.originalEvent.detail === 2) {
                 setIsEditingZone(true);
 
@@ -697,7 +696,7 @@ export default function MapView({
         transition-all duration-200
       `}
           >
-            💾 Guardar edición
+            💾 Guardar
           </button>
         </div>
       )}
