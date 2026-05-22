@@ -118,11 +118,27 @@ export default function App() {
 
     appReady,
 
-    handleLogout,
+    handleLogout: baseLogout,
   } = useSession({
     loadZones,
     loadCompanyUsers,
   });
+
+  const handleLogout = () => {
+    socket.disconnect();
+
+    setUsers({});
+    setTimeline([]);
+    setZones([]);
+    setZoneEvents([]);
+
+    setSelectedUserId(null);
+    setSelectedZone(null);
+
+    localStorage.removeItem('zoneEvents');
+
+    baseLogout();
+  };
 
   const {
     users,
