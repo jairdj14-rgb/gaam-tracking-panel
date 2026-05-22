@@ -125,6 +125,7 @@ export default function App() {
   });
 
   const handleLogout = () => {
+    socket.removeAllListeners();
     socket.disconnect();
 
     setUsers({});
