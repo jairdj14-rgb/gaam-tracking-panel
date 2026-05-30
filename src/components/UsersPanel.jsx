@@ -8,6 +8,7 @@ export default function UsersPanel({ onClose }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('USER');
+  const [workMode, setWorkMode] = useState('FIELD');
   const [message, setMessage] = useState(null);
 
   const loadUsers = useCallback(async () => {
@@ -76,7 +77,7 @@ export default function UsersPanel({ onClose }) {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ name, email, password, role }),
+        body: JSON.stringify({ name, email, password, role, workMode, }),
       });
 
       if (!res.ok) {
@@ -94,6 +95,7 @@ export default function UsersPanel({ onClose }) {
       setEmail('');
       setPassword('');
       setRole('USER');
+      setWorkMode('FIELD');
 
       loadUsers();
       setTimeout(() => setMessage(null), 3000);
@@ -203,6 +205,53 @@ export default function UsersPanel({ onClose }) {
       alert(err.message);
     }
   };
+
+  const editUser = async (user) => {
+  const name = prompt('Nombre', user.name);
+
+  if (!name) return;
+
+  const email = prompt('Email', user.email);
+
+  if (!email) return;
+
+  try {
+    const token = localStorage.getItem('accessToken');
+
+    const res = await fetch(
+      `${ENV.API_URL}/users/${user.id}/profile`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          name,
+          email,
+        }),
+      },
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message);
+    }
+
+    loadUsers();
+
+    setMessage({
+      type: 'success',
+      text: 'Usuario actualizado',
+    });
+  } catch (err) {
+    setMessage({
+      type: 'error',
+      text: err.message,
+    });
+  }
+};
 
   //  UPDATE ROLE
   const updateRole = async (id, newRole) => {
@@ -415,6 +464,41 @@ export default function UsersPanel({ onClose }) {
             </option>
           </select>
 
+          <select
+  value={workMode}
+  onChange={(e) => setWorkMode(e.target.value)}
+  className="
+w-full h-12 px-4
+
+rounded-2xl
+
+bg-[#06111f]
+
+border border-white/10
+
+text-white
+
+outline-none
+
+focus:border-cyan-400/30
+focus:bg-cyan-400/[0.03]
+
+transition-all
+"
+>
+  <option value="FIELD" className="bg-[#06111f] text-white">
+    CAMPO (GPS)
+  </option>
+
+  <option value="OFFICE" className="bg-[#06111f] text-white">
+    OFICINA / HOME OFFICE
+  </option>
+
+  <option value="HYBRID" className="bg-[#06111f] text-white">
+    HÍBRIDO
+  </option>
+</select>
+
           <button
             onClick={createUser}
             className="
@@ -554,7 +638,55 @@ export default function UsersPanel({ onClose }) {
                           ADMIN
                         </option>
 
-                        <button
+                        
+                      </select>
+
+                      <select
+  value={u.workMode || 'FIELD'}
+  onChange={async (e) => {
+    const token = localStorage.getItem('accessToken');
+
+    await fetch(`${ENV.API_URL}/users/${u.id}/work-mode`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        workMode: e.target.value,
+      }),
+    });
+
+    loadUsers();
+  }}
+  className="
+    px-3 py-1.5
+
+rounded-xl
+
+    appearance-none
+bg-[#06111f]
+
+
+    border border-indigo-400/15
+
+    text-indigo-300 text-xs
+  "
+>
+  <option value="FIELD" className="bg-[#06111f] text-white">
+    FIELD
+  </option>
+
+  <option value="OFFICE" className="bg-[#06111f] text-white">
+    OFFICE
+  </option>
+
+  <option value="HYBRID" className="bg-[#06111f] text-white">
+    HYBRID
+  </option>
+</select>
+
+                      <button
                           onClick={() => toggleUser(u.id)}
                           className={`
     h-9 px-3
@@ -590,7 +722,27 @@ export default function UsersPanel({ onClose }) {
                         >
                           {u.isActive ? 'Desactivar' : 'Activar'}
                         </button>
-                      </select>
+
+                        <button
+  onClick={() => editUser(u)}
+  className="
+    h-9 px-3
+
+    rounded-xl
+
+    bg-indigo-500/10
+    hover:bg-indigo-500/15
+
+    border border-indigo-400/20
+
+    text-indigo-300
+    text-xs
+
+    transition-all duration-200
+  "
+>
+  ✏️
+</button>
 
                       <button
                         onClick={() => deleteUser(u.id)}

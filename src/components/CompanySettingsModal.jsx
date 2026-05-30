@@ -13,6 +13,8 @@ export default function CompanySettingsModal({ onClose }) {
 
   const [loading, setLoading] = useState(false);
 
+  const [timezone, setTimezone] = useState('America/Mexico_City');
+
   useEffect(() => {
     loadSettings();
   }, []);
@@ -57,6 +59,7 @@ export default function CompanySettingsModal({ onClose }) {
 
       setMaxSpeed(json.maxSpeed || 120);
       setMaxIdleTime(json.maxIdleTime || 30);
+      setTimezone(json.timezone || 'America/Mexico_City');
     } catch (err) {
       console.log(err);
     }
@@ -97,6 +100,7 @@ export default function CompanySettingsModal({ onClose }) {
           workEnd,
           maxSpeed: Number(maxSpeed),
           maxIdleTime: Number(maxIdleTime),
+          timezone,
         }),
       });
 
@@ -504,6 +508,176 @@ export default function CompanySettingsModal({ onClose }) {
               minutos antes de marcar inactividad
             </div>
           </div>
+
+          {/* TIMEZONE */}
+<div
+  className="
+rounded-3xl
+
+border border-white/10
+
+bg-white/[0.03]
+
+p-5
+
+backdrop-blur-xl
+
+transition-all duration-300
+
+hover:border-cyan-400/15
+hover:bg-white/[0.05]
+"
+>
+  <div className="flex items-center gap-3 mb-4">
+    <div
+      className="
+w-11 h-11
+
+rounded-2xl
+
+bg-cyan-400/10
+
+border border-cyan-400/15
+
+flex items-center justify-center
+
+text-cyan-300
+"
+    >
+      🌎
+    </div>
+
+    <div>
+      <div className="text-sm font-semibold text-white">
+        Zona horaria
+      </div>
+
+      <div className="text-xs text-white/35 mt-1">
+        Configuración regional de horarios y reportes
+      </div>
+    </div>
+  </div>
+
+  <select
+  value={timezone}
+  onChange={(e) => setTimezone(e.target.value)}
+  style={{
+    backgroundColor: '#06111f',
+    color: 'white',
+  }}
+  className="
+w-full h-12 px-4
+
+rounded-2xl
+
+bg-[#06111f]
+
+border border-white/10
+
+text-white
+
+outline-none
+
+focus:border-cyan-400/30
+
+transition-all
+"
+>
+  <option
+    value="America/Mexico_City"
+    style={{
+      backgroundColor: '#06111f',
+      color: 'white',
+    }}
+  >
+    Ciudad de México
+  </option>
+
+  <option
+    value="America/Cancun"
+    style={{
+      backgroundColor: '#06111f',
+      color: 'white',
+    }}
+  >
+    Cancún
+  </option>
+
+  <option
+    value="America/Mazatlan"
+    style={{
+      backgroundColor: '#06111f',
+      color: 'white',
+    }}
+  >
+    Mazatlán
+  </option>
+
+  <option
+    value="America/Tijuana"
+    style={{
+      backgroundColor: '#06111f',
+      color: 'white',
+    }}
+  >
+    Tijuana
+  </option>
+
+  <option
+    value="America/Hermosillo"
+    style={{
+      backgroundColor: '#06111f',
+      color: 'white',
+    }}
+  >
+    Sonora
+  </option>
+
+  <option
+    value="America/New_York"
+    style={{
+      backgroundColor: '#06111f',
+      color: 'white',
+    }}
+  >
+    New York
+  </option>
+
+  <option
+    value="America/Chicago"
+    style={{
+      backgroundColor: '#06111f',
+      color: 'white',
+    }}
+  >
+    Chicago
+  </option>
+
+  <option
+    value="America/Denver"
+    style={{
+      backgroundColor: '#06111f',
+      color: 'white',
+    }}
+  >
+    Denver
+  </option>
+
+  <option
+    value="America/Los_Angeles"
+    style={{
+      backgroundColor: '#06111f',
+      color: 'white',
+    }}
+  >
+    Los Angeles
+  </option>
+</select>
+
+  <div className="text-xs text-gray-500 mt-2">
+    Se utilizará para reportes, asistencia y auditoría
+  </div>
+</div>
         </div>
         {/* FOOTER */}
         <div

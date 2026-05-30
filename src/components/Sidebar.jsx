@@ -40,6 +40,12 @@ export default function Sidebar({
   setShowGlobalReports,
 }) {
   const [showZones, setShowZones] = useState(false);
+
+  const currentUser = JSON.parse(localStorage.getItem('user') || 'null');
+
+const canManualAttendance =
+  currentUser?.workMode === 'OFFICE' ||
+  currentUser?.workMode === 'HYBRID';
   const [openZoneId, setOpenZoneId] = useState(null);
   const list = Object.values(users || {});
   const [inside, setInside] = useState(false);
@@ -406,6 +412,71 @@ export default function Sidebar({
           </div>
         )}
 
+{canManualAttendance && (
+  <>
+    <button
+      onClick={async () => {
+        try {
+          const token = localStorage.getItem('accessToken');
+
+          const res = await fetch(
+            `${ENV.API_URL}/attendance/check-in`,
+            {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          );
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            throw new Error(data.message || 'Error');
+          }
+
+          toast.success('Check-in realizado');
+        } catch (err) {
+          toast.error(err.message);
+        }
+      }}
+      className={`${actionButton} shimmer-button border-emerald-400/20 hover:border-emerald-400/40 hover:bg-emerald-400/10`}
+    >
+      🟢 Check In
+    </button>
+
+    <button
+      onClick={async () => {
+        try {
+          const token = localStorage.getItem('accessToken');
+
+          const res = await fetch(
+            `${ENV.API_URL}/attendance/check-out`,
+            {
+              method: 'POST',
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          );
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            throw new Error(data.message || 'Error');
+          }
+
+          toast.success('Check-out realizado');
+        } catch (err) {
+          toast.error(err.message);
+        }
+      }}
+      className={`${actionButton} shimmer-button border-red-400/20 hover:border-red-400/40 hover:bg-red-400/10`}
+    >
+      🔴 Check Out
+    </button>
+  </>
+)}
         <button
           onClick={() => setShowReports(true)}
           className={`${actionButton} shimmer-button`}
